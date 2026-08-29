@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecureBank Pro - Your Trusted Banking Partner</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; }
+
+        /* ── Navigation ── */
+        nav {
+            background: #003366;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { color: gold; font-size: 1.5em; font-weight: bold; }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9em;
+        }
+        .nav-links a:hover { color: gold; }
+
+        /* ── Hero section ── */
+        .hero {
+            background: linear-gradient(135deg, #003366, #0066cc);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.5em; margin-bottom: 15px; }
+        .hero p { font-size: 1.1em; color: #cce0ff; margin-bottom: 30px; }
+        .hero button {
+            background: gold;
+            color: #003366;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* ── Services ── */
+        .services {
+            padding: 60px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .service-card .icon { font-size: 2em; margin-bottom: 10px; }
+        .service-card h3 { color: #003366; margin-bottom: 8px; }
+        .service-card p { color: #666; font-size: 0.9em; }
+
+        /* ── Footer ── */
+        footer {
+            background: #003366;
+            color: #cce0ff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85em;
+        }
+
+        /* ── Floating chat bubble ── */
+        #chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #003366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        /* ── Chat window ── */
+        #chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 480px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: #003366;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .chat-header .avatar {
+            background: gold;
+            color: #003366;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .chat-header .info .name { font-weight: bold; font-size: 0.95em; }
+        .chat-header .info .status { font-size: 0.75em; color: #90ee90; }
+        #chatbox {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f9f9f9;
+        }
+        .user-msg {
+            text-align: right;
+            margin: 8px 0;
+        }
+        .user-msg span {
+            background: #003366;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 12px 12px 0 12px;
+            font-size: 0.85em;
+            display: inline-block;
+            max-width: 80%;
+        }
+        .agent-msg {
+            text-align: left;
+            margin: 8px 0;
+        }
+        .agent-msg span {
+            background: white;
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 12px 12px 12px 0;
+            font-size: 0.85em;
+            display: inline-block;
+            max-width: 80%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .chat-input {
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 0.85em;
+            outline: none;
+        }
+        .chat-input button {
+            background: #003366;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🏦 SecureBank Pro</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Accounts</a>
+            <a href="#">Loans</a>
+            <a href="#">Investments</a>
+            <a href="#">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>Banking Made Simple & Secure</h1>
+        <p>Trusted by over 2 million customers worldwide</p>
+        <button>Open an Account</button>
+    </div>
+
+    <!-- Services -->
+    <div class="services">
+        <div class="service-card">
+            <div class="icon">💳</div>
+            <h3>Credit Cards</h3>
+            <p>Earn rewards on every purchase with zero annual fee</p>
+        </div>
+        <div class="service-card">
+            <div class="icon">🏠</div>
+            <h3>Home Loans</h3>
+            <p>Competitive rates for your dream home</p>
+        </div>
+        <div class="service-card">
+            <div class="icon">📈</div>
+            <h3>Investments</h3>
+            <p>Grow your wealth with our managed portfolios</p>
+        </div>
+        <div class="service-card">
+            <div class="icon">🔒</div>
+            <h3>Secure Banking</h3>
+            <p>256-bit encryption protecting your assets</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2026 SecureBank Pro. All rights reserved. | FDIC Insured | Equal Housing Lender
+    </footer>
+
+    <!-- Floating chat bubble -->
+    <div id="chat-bubble" onclick="toggleChat()">💬</div>
+
+    <!-- Chat window -->
+    <div id="chat-window">
+        <div class="chat-header">
+            <div class="avatar">SB</div>
+            <div class="info">
+                <div class="name">SecureBank Assistant</div>
+                <div class="status">● Online</div>
+            </div>
+        </div>
+        <div id="chatbox">
+            <div class="agent-msg"><span>👋 Hello! Welcome to SecureBank Pro. How can I assist you today?</span></div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="msg" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const win = document.getElementById("chat-window");
+            win.style.display = win.style.display === "flex" ? "none" : "flex";
+        }
+
+        function sendMessage() {
+            const input = document.getElementById("msg");
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            const chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML += `<div class="user-msg"><span>${msg}</span></div>`;
+            input.value = "";
+
+            fetch("/chat", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({message: msg})
+            })
+            .then(r => r.json())
+            .then(data => {
+                chatbox.innerHTML += `<div class="agent-msg"><span>${data.reply}</span></div>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            });
+        }
+
+        // send on Enter key
+        document.getElementById("msg").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+# sensitive files
+alert.py
+*.json
+uploads/
+
+# python cache
+__pycache__/
+*.pyc
+
+# reports
+*.pdf
